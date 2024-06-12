@@ -1,3 +1,6 @@
+import RecoilProvider from "@/providers/RecoilProvider"
+
+
 interface LayoutProps extends React.PropsWithChildren<React.HtmlHTMLAttributes<HTMLDivElement>> {
   //
 }
@@ -5,7 +8,7 @@ interface LayoutProps extends React.PropsWithChildren<React.HtmlHTMLAttributes<H
 const Layout = (props: LayoutProps) => {
   const { children } = props
 
-  return <div>{children}</div>
+  return  <RecoilProvider flag={false}>{children}</RecoilProvider>
 }
 
 export default Layout

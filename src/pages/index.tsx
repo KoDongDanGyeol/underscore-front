@@ -1,3 +1,6 @@
+import Flag from "@/components/display/Flag"
+
+
 interface PublicPageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
 }
@@ -5,7 +8,12 @@ interface PublicPageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const PublicPage = (props: PublicPageProps) => {
   const {} = props
 
-  return <div>PublicPage</div>
+  return (
+    <div>
+      PublicPage
+      <Flag />
+    </div>
+  )
 }
 
 export default PublicPage

@@ -29,6 +29,8 @@ const eslintConfig = {
     "no-empty-pattern": "warn",
     "react/react-in-jsx-scope": "off",
     "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": ["warn", { additionalHooks: "(useRecoilCallback|useRecoilTransaction_UNSTABLE)" }],
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "warn",
   },
