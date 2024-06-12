@@ -1,5 +1,6 @@
 import { Suspense, Fragment, lazy } from "react"
 import { Routes, Route } from "react-router-dom"
+import Loading from "@/components/display/Loading"
 
 type TypeElement = () => React.ReactElement
 type TypeModule = { default: TypeElement; Pending: TypeElement; Failure: TypeElement }
@@ -29,7 +30,7 @@ const RouterProvider = (props: RouterProviderProps) => {
   const Error = PRESERVED_ROUTES?.["_error"] || Fragment
 
   return (
-    <Suspense fallback={"Loading..."}>
+    <Suspense fallback={<Loading />}>
       <Routes>
         {SPECIFIED_ROUTES.map(({ path, component: Component = Fragment }) => (
           <Route key={path} path={path} element={<Component />} />
