@@ -12,6 +12,10 @@ export type ObjectKeys<T extends object> = Array<keyof T>
 
 export type ObjectValues<T extends object> = Array<T[keyof T]>
 
+export const checkAvailableClient = () => {
+  return typeof window !== "undefined"
+}
+
 export const isEquals = (...arrays: unknown[][]): boolean => {
   if (arrays.length < 2) return false
   const [firstArray, ...restArrays] = arrays

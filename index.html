@@ -7,6 +7,26 @@
     <meta name="title" content="UNDERSCORE" />
     <meta name="description" content="UNDERSCORE" />
     <title>UNDERSCORE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap"
+    />
+    <script>
+      ;(() => {
+        const checkAvailableClient = () => {
+          return typeof window !== "undefined"
+        }
+        const stored = localStorage.getItem("UNDERSCORE_ATOM_THEME")
+        const initial = stored
+          ? stored
+          : checkAvailableClient() && window?.matchMedia?.("(prefers-color-scheme: dark)")?.matches
+            ? "dark"
+            : "light"
+        document?.documentElement?.setAttribute("data-theme", initial)
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>
