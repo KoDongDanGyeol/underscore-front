@@ -1,4 +1,5 @@
 import RecoilProvider from "@/providers/RecoilProvider"
+import QueryProvider from "@/providers/QueryProvider"
 import StyledProvider from "@/providers/StyledProvider"
 import LayoutProvider from "@/providers/LayoutProvider"
 import "@/styles/reset.css"
@@ -12,9 +13,11 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <RecoilProvider flag={false}>
-      <StyledProvider>
-        <LayoutProvider>{children}</LayoutProvider>
-      </StyledProvider>
+      <QueryProvider>
+        <StyledProvider>
+          <LayoutProvider>{children}</LayoutProvider>
+        </StyledProvider>
+      </QueryProvider>
     </RecoilProvider>
   )
 }
