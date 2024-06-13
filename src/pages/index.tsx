@@ -1,20 +1,35 @@
-import Flag from "@/components/display/Flag"
-import Theme from "@/components/display/Theme"
+import styled from "styled-components"
+import { SPECIFIED_ROUTES } from "@/providers/RouterProvider"
+import Link from "@/components/general/Link"
+import Button from "@/components/general/Button"
 
-interface PublicPageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
+interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
 }
 
-const PublicPage = (props: PublicPageProps) => {
+const Page = (props: PageProps) => {
   const {} = props
 
   return (
-    <div>
-      PublicPage
-      <Flag />
-      <Theme />
-    </div>
+    <PageContainer>
+      <PageRoutes>
+        {SPECIFIED_ROUTES.sort(({ path: prev }, { path: next }) => prev.localeCompare(next)).map(({ path }) => (
+          <Button key={path} asTag={Link} to={path} shape="plain">
+            {path}
+          </Button>
+        ))}
+      </PageRoutes>
+    </PageContainer>
   )
 }
 
-export default PublicPage
+const PageRoutes = styled.section`
+  display: flex;
+  flex-direction: column;
+`
+
+const PageContainer = styled.div`
+  /*  */
+`
+
+export default Page

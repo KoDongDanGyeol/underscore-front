@@ -7,7 +7,7 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
-  return <PageContainer>Error</PageContainer>
+  return <PageContainer>Map Analysis Index</PageContainer>
 }
 
 const PageContainer = styled.div`

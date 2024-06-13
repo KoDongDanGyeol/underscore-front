@@ -16,6 +16,11 @@ export const checkAvailableClient = () => {
   return typeof window !== "undefined"
 }
 
+export const checkAuthenticated = () => {
+  const token = localStorage.getItem("UNDERSCORE_TOKEN")
+  return !!token
+}
+
 export const isEquals = (...arrays: unknown[][]): boolean => {
   if (arrays.length < 2) return false
   const [firstArray, ...restArrays] = arrays
