@@ -28,7 +28,7 @@ const LinkMain = (props: LinkMainProps) => {
   const route = useMemo(() => getRoute(to as string), [to])
   const prefetchable = Boolean(route && !structure.isPrefetched)
   const preload = useCallback(() => {
-    route?.preload()
+    route?.onPreload()
     setStructure((prev) => ({ ...prev, isPrefetched: true }))
   }, [route])
 
