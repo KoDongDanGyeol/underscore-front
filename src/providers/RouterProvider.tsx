@@ -16,7 +16,7 @@ export interface RouterProviderProps {
 }
 
 export interface RouterElementProps {
-  layoutEl: React.ForwardRefExoticComponent<PolymorphicComponentProp<"main">>
+  layoutEl: React.ForwardRefExoticComponent<PolymorphicComponentProp<"main" | "div">>
   componentEl: React.LazyExoticComponent<TypeElement> | TypeElement
 }
 

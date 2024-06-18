@@ -34,3 +34,10 @@ export const isEqualsInternal = (arr1: unknown[], arr2: unknown[]): boolean => {
     return isEqualsInternal(element, arr2[index] as unknown[])
   })
 }
+
+export const convertDateToString = (date: Date, format: string = "YYYY-MM-DD hh:mm:ss") => {
+  const match = date.toISOString().match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
+  const [, YYYY, MM, DD, hh, mm, ss] = match ?? []
+  const resources: { [key: string]: string } = { YYYY, MM, DD, hh, mm, ss }
+  return format.replace(/YYYY|MM|DD|hh|mm|ss/g, (match) => resources[match])
+}

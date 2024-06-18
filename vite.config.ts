@@ -7,4 +7,13 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://api.underscore.or.kr",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })
