@@ -1,5 +1,6 @@
-export const IconName = {
+export const EnumIconName = {
   ["Loading"]: "Loading",
+  ["Picture"]: "Picture",
 } as const
 
-export type IconName = (typeof IconName)[keyof typeof IconName]
+export type EnumIconName = (typeof EnumIconName)[keyof typeof EnumIconName]

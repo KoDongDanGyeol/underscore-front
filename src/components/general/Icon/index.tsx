@@ -1,10 +1,10 @@
 import * as data from "@/components/general/Icon/import"
-import { IconName } from "@/components/general/Icon/type"
 import IconMain from "@/components/general/Icon/Main"
+import { EnumIconName } from "@/components/general/Icon/type"
 
 export const Icon = data
 
-export { IconName }
+export { EnumIconName }
 
 export default Object.assign(IconMain, {
   //
