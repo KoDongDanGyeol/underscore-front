@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import Auth from "@/components/layout/Auth"
+import Link from "@/components/general/Link"
+import Button from "@/components/general/Button"
 
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
@@ -7,10 +10,34 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
-  return <PageContainer>Auth Join Complete</PageContainer>
+  return (
+    <PageContainer asTag="main">
+      <Auth.Headline
+        coreEl={(props) => <h2 {...props}>로그인 완료</h2>}
+        detailEl={(props) => <p {...props}>{`UNDERSCORE에 오신 것을 환영합니다!`}</p>}
+      />
+      <PageDirectLink>
+        <Button as={Link} to="/map" variants="primary">
+          지도페이지 바로가기
+        </Button>
+        <Button as={Link} to="/mypage" variants="secondary">
+          마이페이지 바로가기
+        </Button>
+      </PageDirectLink>
+    </PageContainer>
+  )
 }
 
-const PageContainer = styled.div`
+const PageDirectLink = styled.div`
+  &:not(:first-child) {
+    margin-top: 32px;
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`
+
+const PageContainer = styled(Auth.Page)`
   /*  */
 `
 
