@@ -1,7 +1,8 @@
 import { AxiosError } from "axios"
-import { useMutation } from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import axiosClient from "@/queries/axiosInstance"
-import { TypePostLogoutParams, TypePostLogoutResult } from "@/queries/auth"
+import { authKey, TypePostLogoutParams, TypePostLogoutResult } from "@/queries/auth"
+import { getQueryKey } from "@/libs/query"
 import { TypeMutation } from "@/types/query"
 
 export const postLogout: TypeMutation<TypePostLogoutResult, TypePostLogoutParams> = async (params) => {
@@ -10,7 +11,15 @@ export const postLogout: TypeMutation<TypePostLogoutResult, TypePostLogoutParams
   return data
 }
 
-const useMutationLogout = () => {
+const useMutationLogout = (options?: { onFinish?: () => void }) => {
+  const queryClient = useQueryClient()
+
+  const onFinish = () => {
+    localStorage.removeItem("UNDERSCORE_ACCESS_TOKEN")
+    queryClient.invalidateQueries({ queryKey: getQueryKey(authKey).user.toKey() })
+    options?.onFinish?.()
+  }
+
   const { mutateAsync: postLogoutAsync, status: postLogoutStatus } = useMutation<
     TypePostLogoutResult,
     AxiosError,
@@ -20,9 +29,8 @@ const useMutationLogout = () => {
       const data = await postLogout(params)
       return data
     },
-    onSuccess: () => {
-      localStorage.removeItem("UNDERSCORE_ACCESS_TOKEN")
-    },
+    onSuccess: onFinish,
+    onError: onFinish,
   })
 
   return {
