@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { useForm } from "react-hook-form"
+import useMount from "@/hooks/useMount"
+import useMutationLogout from "@/queries/auth/useMutationLogout"
 import Auth from "@/components/layout/Auth"
 import Join, { TypeJoin } from "@/components/form/Join"
 
@@ -16,6 +18,13 @@ const Page = (props: PageProps) => {
     },
   })
 
+  const { postLogoutAsync, postLogoutStatus } = useMutationLogout()
+  const {} = useMount(() => {
+    ;(async () => {
+      await postLogoutAsync({})
+    })()
+  }, [])
+
   const onSubmit = (data: TypeJoin) => {
     window.location.href = `https://api.underscore.or.kr/oauth2/authorization/${data.authorization}`
   }
@@ -23,10 +32,10 @@ const Page = (props: PageProps) => {
   return (
     <PageContainer asTag="main">
       <Auth.Headline
-        coreEl={(props) => <h2 {...props}>로그인</h2>}
+        coreEl={(props) => <h2 {...props}>Join</h2>}
         detailEl={(props) => <p {...props}>{`자주 사용하시는 아이디로 간편하게\nUNDERSCORE 서비스를 이용해보세요`}</p>}
       />
-      <PageForm data={join} onValid={onSubmit} />
+      <PageForm data={join} onValid={onSubmit} isLoading={!["success", "error"].includes(postLogoutStatus)} />
     </PageContainer>
   )
 }

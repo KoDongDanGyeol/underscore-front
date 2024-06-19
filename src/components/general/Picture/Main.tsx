@@ -78,7 +78,7 @@ const PictureMain = (props: PictureMainProps) => {
   )
 }
 
-interface PictureMainStyled {
+type StyledPictureMain = {
   $ratio: NonUndefined<PictureMainProps["ratio"]>
   $rounded: NonUndefined<PictureMainProps["rounded"]>
   $isFallback: boolean
@@ -118,7 +118,7 @@ const PictureFallback = css`
   }
 `
 
-const PictureMainContainer = styled.div<PictureMainStyled>`
+const PictureMainContainer = styled.div<StyledPictureMain>`
   /* size */
   ${(props) => {
     if (props.$ratio && !isEquals(props.$ratio, [0, 0]))

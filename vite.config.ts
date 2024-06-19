@@ -9,10 +9,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": {
+      "/backend": {
         target: "https://api.underscore.or.kr",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/backend/, ""),
       },
     },
   },

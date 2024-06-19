@@ -33,10 +33,9 @@ export const SPECIFIED_ROUTES = Object.keys(SPECIFIED).map((route) => {
     .replace(/\[\.{3}.+\]/, "*")
     .replace(/\[(.+)\]/, ":$1")
     .replace(/(.+)(\/)$/, "$1")
-  const isPublic = !/^\/mypage/.test(path)
   return {
     path,
-    isPublic,
+    isPublic: !/^\/mypage/.test(path),
     layoutEl: /^\/map/.test(path) ? Map : /^\/auth/.test(path) ? Auth : /^\/mypage/.test(path) ? Mypage : Common,
     componentEl: lazy(SPECIFIED[route]),
     onPreload: SPECIFIED[route],
@@ -70,6 +69,7 @@ const RouterProvider = (props: RouterProviderProps) => {
           )
         })}
         <Route path="/map" element={<Navigate to="/map/category" replace={true} />} />
+        <Route path="/auth" element={<Navigate to="/auth/join" replace={true} />} />
         <Route path="/mypage" element={<Navigate to="/mypage/profile" replace={true} />} />
         <Route path="*" element={<RouterElement layoutEl={Common} componentEl={Error} />} />
       </Routes>
