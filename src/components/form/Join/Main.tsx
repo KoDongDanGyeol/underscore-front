@@ -19,13 +19,25 @@ const JoinMain = (props: JoinMainProps) => {
 
   return (
     <JoinMainContainer id="join" noValidate onSubmit={handleSubmit(onValid)} {...restProps}>
-      <JoinMainKakao type="submit" onClick={() => setValue("authorization", EnumJoinAuthorization.Kakao)}>
+      <JoinMainKakao
+        type="submit"
+        onClick={() => setValue("authorization", EnumJoinAuthorization.Kakao)}
+        disabled={isLoading}
+      >
         카카오 로그인
       </JoinMainKakao>
-      <JoinMainNaver type="submit" onClick={() => setValue("authorization", EnumJoinAuthorization.Naver)}>
+      <JoinMainNaver
+        type="submit"
+        onClick={() => setValue("authorization", EnumJoinAuthorization.Naver)}
+        disabled={isLoading}
+      >
         네이버 로그인
       </JoinMainNaver>
-      <JoinMainGoogle type="submit" onClick={() => setValue("authorization", EnumJoinAuthorization.Google)}>
+      <JoinMainGoogle
+        type="submit"
+        onClick={() => setValue("authorization", EnumJoinAuthorization.Google)}
+        disabled={isLoading}
+      >
         구글 로그인
       </JoinMainGoogle>
     </JoinMainContainer>
