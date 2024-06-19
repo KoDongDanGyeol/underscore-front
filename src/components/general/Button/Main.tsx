@@ -51,7 +51,7 @@ const ButtonMain = <C extends React.ElementType = "button">(props: ButtonMainPro
   )
 }
 
-interface ButtonMainStyled<C extends React.ElementType = "button"> {
+type StyledButtonMain<C extends React.ElementType = "button"> = {
   $shape: NonUndefined<ButtonMainProps<C>["shape"]>
   $size: NonUndefined<ButtonMainProps<C>["size"]>
   $variants: NonUndefined<ButtonMainProps<C>["variants"]>
@@ -59,7 +59,7 @@ interface ButtonMainStyled<C extends React.ElementType = "button"> {
   $isActive: NonUndefined<ButtonMainProps<C>["isActive"]>
 }
 
-const ButtonSquare = css<ButtonMainStyled>`
+const ButtonSquare = css<StyledButtonMain>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -99,7 +99,7 @@ const ButtonSquare = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonSquarePrimary = css<ButtonMainStyled>`
+const ButtonSquarePrimary = css<StyledButtonMain>`
   &&:disabled {
     color: rgb(var(--color-neutral800));
     background: rgb(var(--color-neutral300));
@@ -168,7 +168,7 @@ const ButtonSquarePrimary = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonSquareSecondary = css<ButtonMainStyled>`
+const ButtonSquareSecondary = css<StyledButtonMain>`
   &&:disabled {
     color: rgb(var(--color-neutral800));
     background: rgb(var(--color-neutral300));
@@ -237,7 +237,7 @@ const ButtonSquareSecondary = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonPlain = css<ButtonMainStyled>`
+const ButtonPlain = css<StyledButtonMain>`
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -267,7 +267,7 @@ const ButtonPlain = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonPlainPrimary = css<ButtonMainStyled>`
+const ButtonPlainPrimary = css<StyledButtonMain>`
   &&:disabled {
     color: rgb(var(--color-neutral800));
   }
@@ -310,7 +310,7 @@ const ButtonPlainPrimary = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonPlainSecondary = css<ButtonMainStyled>`
+const ButtonPlainSecondary = css<StyledButtonMain>`
   &&:disabled {
     color: rgb(var(--color-neutral800));
   }
@@ -353,7 +353,7 @@ const ButtonPlainSecondary = css<ButtonMainStyled>`
   }}
 `
 
-const ButtonMainContainer = styled.button<ButtonMainStyled>`
+const ButtonMainContainer = styled.button<StyledButtonMain>`
   transition-property: border-color, background-color;
   transition-duration: 0.2s;
   transition-timing-function: var(--motion-ease-in-out);

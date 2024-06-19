@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import useFetchUser from "@/queries/auth/useFetchUser"
 import Auth from "@/components/layout/Auth"
 import Link from "@/components/general/Link"
 import Button from "@/components/general/Button"
@@ -10,11 +11,15 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
+  // TODO
+  const fetchUser = useFetchUser(0, {})
+  console.log("fetchUser", fetchUser)
+
   return (
     <PageContainer asTag="main">
       <Auth.Headline
-        coreEl={(props) => <h2 {...props}>로그인 완료</h2>}
-        detailEl={(props) => <p {...props}>{`UNDERSCORE에 오신 것을 환영합니다!`}</p>}
+        coreEl={(props) => <h2 {...props}>Welcome</h2>}
+        detailEl={(props) => <p {...props}>{`UNDERSCORE에 오신 것을 환영합니다`}</p>}
       />
       <PageDirectLink>
         <Button as={Link} to="/map" variants="primary">

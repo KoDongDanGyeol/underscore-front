@@ -35,6 +35,17 @@ export const isEqualsInternal = (arr1: unknown[], arr2: unknown[]): boolean => {
   })
 }
 
+export const parseCookies = (cookie: string) => {
+  const cookieRegex = /(?:^|;\s*)([^=]+)=([^;]*)/g
+  const cookies: Record<string, string> = {}
+  let match: RegExpExecArray | null
+  while ((match = cookieRegex.exec(cookie)) !== null) {
+    const [, key, value] = match
+    cookies[key] = value
+  }
+  return cookies
+}
+
 export const convertDateToString = (date: Date, format: string = "YYYY-MM-DD hh:mm:ss") => {
   const match = date.toISOString().match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/)
   const [, YYYY, MM, DD, hh, mm, ss] = match ?? []
