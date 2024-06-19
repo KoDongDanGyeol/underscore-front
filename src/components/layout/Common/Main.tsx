@@ -9,17 +9,17 @@ export type CommonMainProps<C extends React.ElementType> = PolymorphicComponentP
   }
 >
 
-const CommonMain = <C extends React.ElementType = "main">(props: CommonMainProps<C>, ref?: PolymorphicRef<C>) => {
+const CommonMain = <C extends React.ElementType = "div">(props: CommonMainProps<C>, ref?: PolymorphicRef<C>) => {
   const { asTag, className = "", children, ...restProps } = props
 
   return (
-    <CommonMainContainer ref={ref} as={asTag ?? "main"} className={`${className}`} {...restProps}>
+    <CommonMainContainer ref={ref} as={asTag ?? "div"} className={`${className}`} {...restProps}>
       {children}
     </CommonMainContainer>
   )
 }
 
-const CommonMainContainer = styled.main`
+const CommonMainContainer = styled.div`
   /*  */
 `
 

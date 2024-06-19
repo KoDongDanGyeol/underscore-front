@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useForm } from "react-hook-form"
 import useMount from "@/hooks/useMount"
 import useMutationLogout from "@/queries/auth/useMutationLogout"
+import { onLogout } from "@/businesses/auth"
 import Auth from "@/components/layout/Auth"
 import Join, { TypeJoin } from "@/components/form/Join"
 
@@ -18,7 +19,10 @@ const Page = (props: PageProps) => {
     },
   })
 
-  const { postLogoutAsync, postLogoutStatus } = useMutationLogout()
+  const { postLogoutAsync, postLogoutStatus } = useMutationLogout({
+    onFinish: onLogout,
+  })
+
   const {} = useMount(() => {
     ;(async () => {
       await postLogoutAsync({})
@@ -26,7 +30,7 @@ const Page = (props: PageProps) => {
   }, [])
 
   const onSubmit = (data: TypeJoin) => {
-    window.location.href = `https://api.underscore.or.kr/oauth2/authorization/${data.authorization}`
+    window.location.replace(`https://api.underscore.or.kr/oauth2/authorization/${data.authorization}`)
   }
 
   return (

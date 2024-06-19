@@ -50,7 +50,7 @@ axiosClient.interceptors.response.use(
           // TODO
           // localStorage.removeItem("UNDERSCORE_ACCESS_TOKEN")
           // alert("요청에 포함된 보안 토큰이 만료되었습니다.")
-          // window.location.href = `${window.location.origin}/auth/join`
+          // window.location.replace(`${window.location.origin}/auth`)
           return Promise.reject(error)
         }
       }

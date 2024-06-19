@@ -17,7 +17,7 @@ export const checkAvailableClient = () => {
 }
 
 export const checkAuthenticated = () => {
-  const token = localStorage.getItem("UNDERSCORE_TOKEN")
+  const token = localStorage.getItem("UNDERSCORE_ACCESS_TOKEN")
   return !!token
 }
 
