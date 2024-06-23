@@ -1,3 +1,3 @@
-export const onLogout = () => {
-  window.location.replace("/map")
+export const onLogout = {
+  onFinish: () => window.location.replace("/map"),
 }

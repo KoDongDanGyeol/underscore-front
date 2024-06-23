@@ -12,7 +12,8 @@ const Page = (props: PageProps) => {
   const {} = props
 
   const { postLogoutAsync } = useMutationLogout({
-    onFinish: onLogout,
+    onSuccess: onLogout.onFinish,
+    onError: onLogout.onFinish,
   })
 
   const {} = useMount(() => {

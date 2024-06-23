@@ -21,7 +21,7 @@ const CopyrightMain = (props: CopyrightMainProps) => {
         </Button>
       </CopyrightMainPolicy>
       <CopyrightMainReference>
-        <span>&copy;{`${convertDateToString(new Date(), "YYYY")} UNDERSCORE`}</span>
+        <span>&copy;{`${convertDateToString(new Date(), "YYYY")} ${import.meta.env.VITE_SERVICE_NAME}`}</span>
       </CopyrightMainReference>
     </CopyrightMainContainer>
   )

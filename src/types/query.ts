@@ -20,3 +20,5 @@ export type TypeQueryKeyHelper<T extends TypeQueryKey, P extends string[] = []> 
 export type TypeFetch<T, P, K extends TypeQueryKey = Record<string, never>> = (kidId: P, params: K) => Promise<T>
 
 export type TypeMutation<T, K extends TypeQueryKey = Record<string, never>> = (params: K) => Promise<T>
+
+export type TypeQueryOptions = { onSuccess?: () => void; onError?: () => void }
