@@ -18,8 +18,8 @@ const Page = (props: PageProps) => {
   return (
     <PageContainer asTag="main">
       <Auth.Headline
-        coreEl={(props) => <h2 {...props}>Welcome</h2>}
-        detailEl={(props) => <p {...props}>{`UNDERSCORE에 오신 것을 환영합니다`}</p>}
+        coreEl={(props: Record<string, unknown>) => <h2 {...props}>Welcome</h2>}
+        detailEl={(props: Record<string, unknown>) => <p {...props}>{`UNDERSCORE에 오신 것을 환영합니다`}</p>}
       />
       <PageDirectLink>
         <Button as={Link} to="/map" variants="primary">

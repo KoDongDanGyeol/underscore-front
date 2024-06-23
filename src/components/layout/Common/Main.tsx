@@ -20,7 +20,7 @@ const CommonMain = <C extends React.ElementType = "div">(props: CommonMainProps<
 }
 
 const CommonMainContainer = styled.div`
-  /*  */
+  align-self: center;
 `
 
 export default forwardRef(CommonMain)

@@ -16,11 +16,6 @@ export const checkAvailableClient = () => {
   return typeof window !== "undefined"
 }
 
-export const checkAuthenticated = () => {
-  const token = localStorage.getItem("UNDERSCORE_ACCESS_TOKEN")
-  return !!token
-}
-
 export const isEquals = (...arrays: unknown[][]): boolean => {
   if (arrays.length < 2) return false
   const [firstArray, ...restArrays] = arrays
@@ -33,17 +28,6 @@ export const isEqualsInternal = (arr1: unknown[], arr2: unknown[]): boolean => {
     if (!Array.isArray(element) || !Array.isArray(arr2[index])) return element === arr2[index]
     return isEqualsInternal(element, arr2[index] as unknown[])
   })
-}
-
-export const parseCookies = (cookie: string) => {
-  const cookieRegex = /(?:^|;\s*)([^=]+)=([^;]*)/g
-  const cookies: Record<string, string> = {}
-  let match: RegExpExecArray | null
-  while ((match = cookieRegex.exec(cookie)) !== null) {
-    const [, key, value] = match
-    cookies[key] = value
-  }
-  return cookies
 }
 
 export const convertDateToString = (date: Date, format: string = "YYYY-MM-DD hh:mm:ss") => {
