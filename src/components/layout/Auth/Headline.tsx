@@ -16,7 +16,7 @@ const AuthHeadline = (props: AuthHeadlineProps) => {
   )
 }
 
-const AuthHeadlineCore = styled.h1`
+const AuthHeadlineCore = styled.h2`
   text-align: center;
   font-size: ${(props) => props.theme.typo.size["2xl"]};
   line-height: ${(props) => props.theme.typo.leading["2xl"]};
