@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
+import Map from "@/components/layout/Map"
 
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
@@ -14,10 +15,10 @@ const Page = (props: PageProps) => {
 
   const { analysisId } = useParams<TypeParams>()
 
-  return <PageContainer>Map Analysis {analysisId}</PageContainer>
+  return <PageContainer asTag="main">Map Analysis {analysisId}</PageContainer>
 }
 
-const PageContainer = styled.div`
+const PageContainer = styled(Map.Page)`
   /*  */
 `
 

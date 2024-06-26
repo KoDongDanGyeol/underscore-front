@@ -8,27 +8,16 @@ export interface CommonLoadingProps extends React.HTMLAttributes<HTMLDivElement>
 const CommonLoading = (props: CommonLoadingProps) => {
   const { className = "", ...restProps } = props
 
-  return (
-    <CommonLoadingContainer className={`${className}`} {...restProps}>
-      <CommonLoadingSpinner />
-    </CommonLoadingContainer>
-  )
+  return <CommonLoadingContainer className={`${className}`} {...restProps} />
 }
 
-const CommonLoadingSpinner = styled(Loading)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  font-size: 24px;
-  transform: translate(-50%, -50%);
-`
-
-const CommonLoadingContainer = styled.div`
+const CommonLoadingContainer = styled(Loading)`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  font-size: 24px;
   background: rgb(var(--color-neutral100));
 `
 

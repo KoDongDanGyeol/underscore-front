@@ -12,8 +12,7 @@ export type ButtonMainProps<C extends React.ElementType = "button"> = Polymorphi
     variants?: EnumButtonVariants
     isDanger?: boolean
     isActive?: boolean
-    prefixEl?: React.ReactNode
-    suffixEl?: React.ReactNode
+    iconEl?: React.ElementType
   }
 >
 
@@ -25,8 +24,7 @@ const ButtonMain = <C extends React.ElementType = "button">(props: ButtonMainPro
     variants = EnumButtonVariants.Primary,
     isDanger = false,
     isActive = false,
-    prefixEl = null,
-    suffixEl = null,
+    iconEl: IconEl,
     className = "",
     children,
     ...restProps
@@ -41,12 +39,12 @@ const ButtonMain = <C extends React.ElementType = "button">(props: ButtonMainPro
       $variants={variants}
       $isDanger={isDanger}
       $isActive={isActive}
+      $onlyIcon={IconEl && !children}
       className={`${className}`}
       {...restProps}
     >
-      {prefixEl && <span className="extra-prefix">{prefixEl}</span>}
+      {IconEl && <ButtonMainIcon as={IconEl} />}
       {children}
-      {suffixEl && <span className="extra-suffix">{suffixEl}</span>}
     </ButtonMainContainer>
   )
 }
@@ -66,7 +64,6 @@ const ButtonSquare = css<StyledButtonMain>`
   justify-content: center;
   gap: 6px;
   font-weight: 400;
-  text-align: center;
   color: rgb(var(--color-neutral1100));
   border: 1px solid transparent;
   outline: none;
@@ -353,6 +350,11 @@ const ButtonPlainSecondary = css<StyledButtonMain>`
   }}
 `
 
+const ButtonMainIcon = styled.svg`
+  flex: none;
+  margin: 0.23em 0;
+`
+
 const ButtonMainContainer = styled.button<StyledButtonMain>`
   transition-property: border-color, background-color;
   transition-duration: 0.2s;
@@ -381,33 +383,6 @@ const ButtonMainContainer = styled.button<StyledButtonMain>`
   }}
   &:disabled {
     opacity: 0.8;
-  }
-  .extra-prefix,
-  .extra-suffix {
-    display: flex;
-    flex: none;
-    align-items: center;
-    > button {
-      margin: -4px;
-      padding: 4px;
-    }
-    ${(props) => {
-      switch (props.$size) {
-        case EnumButtonSize.SM:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.xs};
-          `
-        case EnumButtonSize.LG:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.sm};
-          `
-        case EnumButtonSize.BASE:
-        default:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.xs};
-          `
-      }
-    }}
   }
 `
 

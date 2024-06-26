@@ -19,11 +19,10 @@ const useMount = (callback?: TypeCallback, deps?: TypeDependencies) => {
   const dependenciesRef = useRef<TypeDependencies>(dependencies)
 
   useEffect(() => {
-    const cleanup = callback?.()
     setStructure((prev) => ({
       ...prev,
       isMounted: true,
-      cleanup,
+      cleanup: callback?.(),
     }))
     return () => {
       structure?.cleanup?.()
@@ -32,11 +31,11 @@ const useMount = (callback?: TypeCallback, deps?: TypeDependencies) => {
 
   useEffect(() => {
     if (!structure.isMounted) return
-    if (isEquals(dependenciesRef.current, dependencies)) return
-    const cleanup = callback?.()
+    if (isEquals(dependenciesRef.current ?? [], dependencies)) return
+    dependenciesRef.current = dependencies
     setStructure((prev) => ({
       ...prev,
-      cleanup,
+      cleanup: callback?.(),
     }))
   }, [dependencies])
 
