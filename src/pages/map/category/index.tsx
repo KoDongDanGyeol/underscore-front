@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Map from "@/components/layout/Map"
 
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
@@ -7,10 +8,10 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
-  return <PageContainer>Map Category Index</PageContainer>
+  return <PageContainer asTag="main">Map Category Index</PageContainer>
 }
 
-const PageContainer = styled.div`
+const PageContainer = styled(Map.Page)`
   /*  */
 `
 
