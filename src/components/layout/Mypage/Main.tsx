@@ -17,14 +17,9 @@ const MypageMain = <C extends React.ElementType = "div">(props: MypageMainProps<
     <MypageMainContainer ref={ref} as={asTag ?? "div"} className={`${className}`} {...restProps}>
       <Common.Header />
       {children}
-      <MypageMainFooter />
     </MypageMainContainer>
   )
 }
-
-const MypageMainFooter = styled(Common.Footer)`
-  margin-top: 24px;
-`
 
 const MypageMainContainer = styled.div`
   align-self: stretch;

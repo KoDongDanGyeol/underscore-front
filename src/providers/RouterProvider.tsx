@@ -5,6 +5,7 @@ import { useRecoilValue } from "recoil"
 import { atomGlobal } from "@/stores/global"
 import { PolymorphicComponentProp } from "@/types/polymorphic"
 import Common from "@/components/layout/Common"
+import Service from "@/components/layout/Service"
 import Map from "@/components/layout/Map"
 import Mypage from "@/components/layout/Mypage"
 import Auth from "@/components/layout/Auth"
@@ -23,7 +24,12 @@ export interface RouterElementProps {
   errorEl: React.ElementType
 }
 
-const getLayout = (path: string) => {
+export const getRoute = (path: string) => {
+  return SPECIFIED_ROUTES.find((route) => path.match(new RegExp(route.path.replace(/:\w+|\*/g, ".*")))?.[0] === path)
+}
+
+export const getLayout = (path: string) => {
+  if (/^\/$/.test(path)) return Service
   if (/^\/map/.test(path)) return Map
   if (/^\/auth/.test(path)) return Auth
   if (/^\/mypage/.test(path)) return Mypage
@@ -42,7 +48,7 @@ export const SPECIFIED_ROUTES = Object.keys(SPECIFIED).map((route) => {
   const path = route
     .replace(/\/src\/pages|index|\.tsx$/g, "")
     .replace(/\[\.{3}.+\]/, "*")
-    .replace(/\[(.+)\]/, ":$1")
+    .replace(/\[([^\]]+)\]/g, ":$1")
     .replace(/(.+)(\/)$/, "$1")
   return {
     path,

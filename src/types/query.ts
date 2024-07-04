@@ -1,3 +1,5 @@
+import { UseQueryResult } from "@tanstack/react-query"
+
 type Cast<X, Y> = X extends Y ? X : Y
 
 type Fn = (...args: any[]) => any[]
@@ -17,8 +19,14 @@ export type TypeQueryKeyHelper<T extends TypeQueryKey, P extends string[] = []> 
       : { toKey: () => [...P, k] }
 }
 
-export type TypeFetch<T, P, K extends TypeQueryKey = Record<string, never>> = (kidId: P, params: K) => Promise<T>
+export type TypeMutation<T, K extends TypeQueryKey> = (params: K) => Promise<T>
 
-export type TypeMutation<T, K extends TypeQueryKey = Record<string, never>> = (params: K) => Promise<T>
+export type TypeFetch<T, P, K extends TypeQueryKey> = (kidId: P, params: K) => Promise<T>
 
-export type TypeQueryOptions = { onSuccess?: () => void; onError?: () => void }
+export type TypeOptions<T> = { onSuccess?: (data?: T) => void; onError?: () => void }
+
+export type TypeQuery<T, P, K extends TypeQueryKey> = (
+  kidId: P,
+  params: K,
+  options?: TypeOptions<T>,
+) => UseQueryResult<T>

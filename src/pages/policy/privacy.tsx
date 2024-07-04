@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import Policy from "@/components/layout/Policy"
 
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
@@ -7,10 +8,10 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
-  return <PageContainer>Policy Privacy</PageContainer>
+  return <PageContainer asTag="main">Policy Privacy</PageContainer>
 }
 
-const PageContainer = styled.div`
+const PageContainer = styled(Policy.Page)`
   /*  */
 `
 

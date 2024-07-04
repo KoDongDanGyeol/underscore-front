@@ -1,5 +1,3 @@
-import styled from "styled-components"
-
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   //
 }
@@ -7,11 +5,7 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
-  return <PageContainer>Mypage Membership Change Join</PageContainer>
+  return <>Mypage Membership Change Join</>
 }
-
-const PageContainer = styled.div`
-  /*  */
-`
 
 export default Page

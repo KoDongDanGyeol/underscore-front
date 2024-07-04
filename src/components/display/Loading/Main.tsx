@@ -1,17 +1,21 @@
+import { forwardRef } from "react"
 import styled from "styled-components"
+import { PolymorphicComponentPropWithRef, PolymorphicRef } from "@/types/polymorphic"
 import Icon from "@/components/general/Icon"
 
-export interface LoadingMainProps extends React.HTMLAttributes<HTMLDivElement> {
-  //
-}
+export type LoadingMainProps<C extends React.ElementType> = PolymorphicComponentPropWithRef<
+  C,
+  {
+    //
+  }
+>
 
-const LoadingMain = (props: LoadingMainProps) => {
-  const { className = "", ...restProps } = props
+const LoadingMain = <C extends React.ElementType = "div">(props: LoadingMainProps<C>, ref?: PolymorphicRef<C>) => {
+  const { asTag, className = "", children, ...restProps } = props
 
   return (
-    <LoadingMainContainer className={`${className}`} {...restProps}>
-      <Icon name="Loading" aria-hidden={true} />
-      <span className="sr-only">Loading</span>
+    <LoadingMainContainer ref={ref} as={asTag ?? "div"} className={`${className}`} {...restProps}>
+      <Icon name="Loading" label="Loading" />
     </LoadingMainContainer>
   )
 }
@@ -23,4 +27,4 @@ const LoadingMainContainer = styled.div`
   color: rgb(var(--color-primary600));
 `
 
-export default LoadingMain
+export default forwardRef(LoadingMain)

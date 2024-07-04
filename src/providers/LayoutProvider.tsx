@@ -56,6 +56,7 @@ const LayoutContainer = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  min-height: 100svh;
 `
 
 export default LayoutProvider

@@ -54,7 +54,7 @@ const PictureMain = (props: PictureMainProps) => {
   if (!structure.src || structure.isErrored) {
     return (
       <PictureMainContainer className={`${className}`} $ratio={ratio ?? [1, 1]} $rounded={rounded} $isFallback={true}>
-        {fallbackText ? <span>{fallbackText}</span> : <Icon name={fallbackIcon} aria-hidden={true} />}
+        {fallbackText ? <span>{fallbackText}</span> : <Icon name={fallbackIcon} label={alt} />}
       </PictureMainContainer>
     )
   }

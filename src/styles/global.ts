@@ -158,7 +158,8 @@ const StyledGlobal = styled.createGlobalStyle`
     -webkit-text-size-adjust: none;
     -webkit-overflow-scrolling: touch;
   }
-  body.open-panel {
+  body.open-navigation,
+  body.open-bottomSheet {
     overflow: hidden;
   }
   h1,
@@ -180,6 +181,7 @@ const StyledGlobal = styled.createGlobalStyle`
   svg {
     width: 1em;
     height: 1em;
+    pointer-events: none;
   }
   *,
   *:before,
@@ -194,6 +196,7 @@ const StyledGlobal = styled.createGlobalStyle`
   button {
     display: inline-block;
     padding: 0;
+    text-align: left;
     font-size: ${(props) => props.theme.typo.size.sm};
     line-height: ${(props) => props.theme.typo.leading.sm};
     font-family: "Noto Sans KR", sans-serif;

@@ -1,22 +1,24 @@
 import { useEffect } from "react"
-import { AxiosError } from "axios"
 import { useSetRecoilState } from "recoil"
 import { useQuery } from "@tanstack/react-query"
 import axiosClient from "@/queries/axiosInstance"
 import { atomGlobal } from "@/stores/global"
 import { authKey, TypeGetUserKidId, TypeGetUserParams, TypeGetUserResult } from "@/queries/auth"
 import { getQueryKey } from "@/libs/query"
-import { TypeFetch, TypeQueryOptions } from "@/types/query"
+import { TypeFetch, TypeQuery } from "@/types/query"
 
-export const getUser: TypeFetch<TypeGetUserResult, TypeGetUserParams> = async () => {
+type TypeGetUser = TypeFetch<TypeGetUserResult, TypeGetUserKidId, TypeGetUserParams>
+type TypeFetchUser = TypeQuery<TypeGetUserResult, TypeGetUserKidId, TypeGetUserParams>
+
+export const getUser: TypeGetUser = async () => {
   const { data } = await axiosClient.get(`${import.meta.env.VITE_BACKEND_API_URL}/api/user`)
   return data
 }
 
-const useFetchUser = (kidId: TypeGetUserKidId, params: TypeGetUserParams, options?: TypeQueryOptions) => {
+const useFetchUser: TypeFetchUser = (kidId, params, options) => {
   const setGlobal = useSetRecoilState(atomGlobal)
 
-  const context = useQuery<TypeGetUserParams, AxiosError, TypeGetUserResult>({
+  const context = useQuery({
     queryKey: getQueryKey(authKey).user.default.toKeyWithArgs(kidId, params),
     queryFn: async () => {
       const data = await getUser(kidId, params)
@@ -25,12 +27,18 @@ const useFetchUser = (kidId: TypeGetUserKidId, params: TypeGetUserParams, option
   })
 
   useEffect(() => {
-    if (context.status === "success") {
-      setGlobal((prev) => ({ ...prev, logged: true }))
-      options?.onSuccess?.()
-    } else if (context.status === "error") {
-      setGlobal((prev) => ({ ...prev, logged: false }))
-      options?.onError?.()
+    switch (context.status) {
+      case "success":
+        setGlobal((prev) => ({ ...prev, logged: true }))
+        options?.onSuccess?.(context.data)
+        break
+      case "error":
+        setGlobal((prev) => ({ ...prev, logged: false }))
+        options?.onError?.()
+        break
+      default:
+        //
+        break
     }
   }, [context.status])
 

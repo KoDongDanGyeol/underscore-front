@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Link, LinkProps } from "react-router-dom"
-import { SPECIFIED_ROUTES } from "@/providers/RouterProvider"
 import useOnScreen from "@/hooks/useOnScreen"
+import { getRoute } from "@/providers/RouterProvider"
 
 export interface LinkMainProps extends LinkProps {
   prefetch?: boolean
@@ -9,10 +9,6 @@ export interface LinkMainProps extends LinkProps {
 
 type TypeStructure = {
   isPrefetched: boolean
-}
-
-const getRoute = (path: string) => {
-  return SPECIFIED_ROUTES.find((route) => path.match(new RegExp(route.path.replace(/:\w+|\*/g, ".*")))?.[0] === path)
 }
 
 const LinkMain = (props: LinkMainProps) => {

@@ -12,8 +12,8 @@ export type ButtonMainProps<C extends React.ElementType = "button"> = Polymorphi
     variants?: EnumButtonVariants
     isDanger?: boolean
     isActive?: boolean
-    prefixEl?: React.ReactNode
-    suffixEl?: React.ReactNode
+    prefixEl?: React.ElementType
+    suffixEl?: React.ElementType
   }
 >
 
@@ -25,8 +25,8 @@ const ButtonMain = <C extends React.ElementType = "button">(props: ButtonMainPro
     variants = EnumButtonVariants.Primary,
     isDanger = false,
     isActive = false,
-    prefixEl = null,
-    suffixEl = null,
+    prefixEl: PrefixEl = null,
+    suffixEl: SuffixEl = null,
     className = "",
     children,
     ...restProps
@@ -41,12 +41,13 @@ const ButtonMain = <C extends React.ElementType = "button">(props: ButtonMainPro
       $variants={variants}
       $isDanger={isDanger}
       $isActive={isActive}
+      $onlyIcon={Boolean((PrefixEl || SuffixEl) && !children)}
       className={`${className}`}
       {...restProps}
     >
-      {prefixEl && <span className="extra-prefix">{prefixEl}</span>}
+      {PrefixEl && <ButtonMainIcon as={PrefixEl} />}
       {children}
-      {suffixEl && <span className="extra-suffix">{suffixEl}</span>}
+      {SuffixEl && <ButtonMainIcon as={SuffixEl} />}
     </ButtonMainContainer>
   )
 }
@@ -57,6 +58,7 @@ type StyledButtonMain<C extends React.ElementType = "button"> = {
   $variants: NonUndefined<ButtonMainProps<C>["variants"]>
   $isDanger: NonUndefined<ButtonMainProps<C>["isDanger"]>
   $isActive: NonUndefined<ButtonMainProps<C>["isActive"]>
+  $onlyIcon: boolean
 }
 
 const ButtonSquare = css<StyledButtonMain>`
@@ -66,7 +68,6 @@ const ButtonSquare = css<StyledButtonMain>`
   justify-content: center;
   gap: 6px;
   font-weight: 400;
-  text-align: center;
   color: rgb(var(--color-neutral1100));
   border: 1px solid transparent;
   outline: none;
@@ -337,20 +338,25 @@ const ButtonPlainSecondary = css<StyledButtonMain>`
         return css`
           color: rgb(var(--color-neutral1100));
           &:not(:disabled):hover {
-            color: rgb(var(--color-neutral1000));
+            color: rgb(var(--color-neutral700));
           }
           &:not(:disabled):active {
-            color: rgb(var(--color-neutral1200));
+            color: rgb(var(--color-neutral1300));
           }
           ${props.$isActive &&
           css`
             &:not(:disabled) {
-              color: rgb(var(--color-neutral1200));
+              color: rgb(var(--color-neutral1300));
             }
           `}
         `
     }
   }}
+`
+
+const ButtonMainIcon = styled.svg`
+  flex: none;
+  margin: 0.23em 0;
 `
 
 const ButtonMainContainer = styled.button<StyledButtonMain>`
@@ -379,35 +385,23 @@ const ButtonMainContainer = styled.button<StyledButtonMain>`
         }
     }
   }}
+  ${(props) => {
+    switch (props.$onlyIcon) {
+      case true:
+        return css`
+          padding: 0;
+        `
+      case false:
+      default:
+        return css`
+          ${ButtonMainIcon} {
+            transform: scale(0.9);
+          }
+        `
+    }
+  }}
   &:disabled {
     opacity: 0.8;
-  }
-  .extra-prefix,
-  .extra-suffix {
-    display: flex;
-    flex: none;
-    align-items: center;
-    > button {
-      margin: -4px;
-      padding: 4px;
-    }
-    ${(props) => {
-      switch (props.$size) {
-        case EnumButtonSize.SM:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.xs};
-          `
-        case EnumButtonSize.LG:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.sm};
-          `
-        case EnumButtonSize.BASE:
-        default:
-          return css`
-            font-size: ${(props) => props.theme.typo.size.xs};
-          `
-      }
-    }}
   }
 `
 

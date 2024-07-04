@@ -15,16 +15,18 @@
     />
     <script>
       ;(() => {
-        const checkAvailableClient = () => {
-          return typeof window !== "undefined"
+        const THEME = { Dark: "dark", Light: "light" }
+        const checkStored = (origin) => {
+          try {
+            if (Object.values(THEME).includes(origin)) return origin
+            if (window?.matchMedia?.("(prefers-color-scheme: dark)")?.matches) return THEME.Dark
+            return THEME.Light
+          } catch (error) {
+            return null
+          }
         }
-        const stored = localStorage.getItem("UNDERSCORE_ATOM_THEME")
-        const initial = stored
-          ? stored
-          : checkAvailableClient() && window?.matchMedia?.("(prefers-color-scheme: dark)")?.matches
-            ? "dark"
-            : "light"
-        document?.documentElement?.setAttribute("data-theme", initial)
+        const stored = checkStored(localStorage.getItem("UNDERSCORE_ATOM_THEME") ?? "")
+        document?.documentElement?.setAttribute("data-theme", stored)
       })()
     </script>
   </head>

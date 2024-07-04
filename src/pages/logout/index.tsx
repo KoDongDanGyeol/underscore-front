@@ -1,7 +1,8 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import useMount from "@/hooks/useMount"
 import useMutationLogout from "@/queries/auth/useMutationLogout"
-import { onLogout } from "@/businesses/common"
+import { getRoute } from "@/providers/RouterProvider"
 import Common from "@/components/layout/Common"
 
 interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
@@ -11,13 +12,16 @@ interface PageProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 const Page = (props: PageProps) => {
   const {} = props
 
+  const navigate = useNavigate()
   const { postLogoutAsync } = useMutationLogout({
-    onSuccess: onLogout.onFinish,
-    onError: onLogout.onFinish,
+    onSuccess: () => navigate("/"),
+    onError: () => navigate("/"),
   })
 
   const {} = useMount(() => {
     ;(async () => {
+      const route = getRoute("/")
+      await route?.onPreload()
       await postLogoutAsync({})
     })()
   }, [])

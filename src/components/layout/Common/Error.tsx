@@ -7,7 +7,13 @@ export interface CommonErrorProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const CommonError = (props: CommonErrorProps) => {
-  const { coreEl: CoreEl, detailEl: DetailEl, actionEl: ActionEl, className = "", ...restProps } = props
+  const {
+    coreEl: CoreEl = null,
+    detailEl: DetailEl = null,
+    actionEl: ActionEl = null,
+    className = "",
+    ...restProps
+  } = props
 
   return (
     <CommonErrorContainer className={`${className}`} {...restProps}>

@@ -12,7 +12,7 @@ export type ObjectKeys<T extends object> = Array<keyof T>
 
 export type ObjectValues<T extends object> = Array<T[keyof T]>
 
-export const checkAvailableClient = () => {
+export const availableClient = () => {
   return typeof window !== "undefined"
 }
 
